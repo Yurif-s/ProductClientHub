@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProductClientHub.API.UseCase.Client.Register;
 using ProductClientHub.Communication.Requests;
 using ProductClientHub.Communication.Responses;
 
@@ -9,9 +10,25 @@ public class ClientsController : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType(typeof(ResponseClientJson), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ResponseErrorsMessagesJson), StatusCodes.Status400BadRequest)]
     public IActionResult Register([FromBody] RequestClientJson request)
     {
-        return Created();
+        try
+        {
+            var useCase = new RegisterClientUseCase();
+
+            var response = useCase.Execute(request);
+
+            return Created(string.Empty, response);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(new ResponseErrorsMessagesJson(ex.Message));
+        }
+        catch
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, new ResponseErrorsMessagesJson("Unknown error")) ;
+        }
     }
 
     [HttpGet]
