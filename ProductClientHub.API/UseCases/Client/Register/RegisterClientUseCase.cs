@@ -1,6 +1,7 @@
 ﻿using ProductClientHub.API.UseCases.Client.Register;
 using ProductClientHub.Communication.Requests;
 using ProductClientHub.Communication.Responses;
+using ProductClientHub.Exceptions.ExceptionsBase;
 
 namespace ProductClientHub.API.UseCase.Client.Register;
 
@@ -12,9 +13,11 @@ public class RegisterClientUseCase
 
         var result = validator.Validate(request);
 
-        if(result.IsValid == false)
+        if (result.IsValid == false)
         {
-            throw new ArgumentException("Error in received data");
+            var errors = result.Errors.Select(failure => failure.ErrorMessage).ToList();
+
+            throw new ErrorOnValidationException(errors);
         }
 
         return new ResponseClientJson();
