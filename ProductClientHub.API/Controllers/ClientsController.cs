@@ -2,7 +2,6 @@
 using ProductClientHub.API.UseCase.Client.Register;
 using ProductClientHub.Communication.Requests;
 using ProductClientHub.Communication.Responses;
-using ProductClientHub.Exceptions.ExceptionsBase;
 
 namespace ProductClientHub.API.Controllers;
 [Route("api/[controller]")]
@@ -14,24 +13,11 @@ public class ClientsController : ControllerBase
     [ProducesResponseType(typeof(ResponseErrorsMessagesJson), StatusCodes.Status400BadRequest)]
     public IActionResult Register([FromBody] RequestClientJson request)
     {
-        try
-        {
-            var useCase = new RegisterClientUseCase();
+        var useCase = new RegisterClientUseCase();
 
-            var response = useCase.Execute(request);
+        var response = useCase.Execute(request);
 
-            return Created(string.Empty, response);
-        }
-        catch (ProductClientHubException ex)
-        {
-            var erros = ex.GetErrors();
-
-            return BadRequest(new ResponseErrorsMessagesJson(erros));
-        }
-        catch
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, new ResponseErrorsMessagesJson("Unknown error")) ;
-        }
+        return Created(string.Empty, response);
     }
 
     [HttpGet]
