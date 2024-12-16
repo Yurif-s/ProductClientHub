@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProductClientHub.API.UseCase.Client.Register;
+using ProductClientHub.API.UseCases.Clients.Register ;
 using ProductClientHub.Communication.Requests;
 using ProductClientHub.Communication.Responses;
 

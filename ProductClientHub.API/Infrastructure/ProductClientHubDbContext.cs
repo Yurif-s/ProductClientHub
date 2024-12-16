@@ -3,7 +3,7 @@ using ProductClientHub.API.Entities;
 
 namespace ProductClientHub.API.Infrastructure;
 
-public class ProductClientDbContext : DbContext
+public class ProductClientHubDbContext : DbContext
 {
     public DbSet<Client> Clients { get; set; }
     public DbSet<Product> Products { get; set; }
