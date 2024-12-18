@@ -24,18 +24,8 @@ public class RegisterProductUseCase
         };
 
         dbContext.Products.Add(entity);
-        try
-        {
-            dbContext.SaveChanges();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Erro ao salvar alterações: {ex.Message}");
-            Console.WriteLine($"Detalhes: {ex.InnerException?.Message}");
-            throw;
-        }
-
-
+        dbContext.SaveChanges();
+        
         return new ResponseShortProductJson
         {
             Id = entity.Id,
