@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Update.Internal;
 using ProductClientHub.API.UseCases.Clients.GetAll;
-using ProductClientHub.API.UseCases.Clients.Register ;
+using ProductClientHub.API.UseCases.Clients.Register;
 using ProductClientHub.API.UseCases.Clients.Update;
 using ProductClientHub.Communication.Requests;
 using ProductClientHub.Communication.Responses;
