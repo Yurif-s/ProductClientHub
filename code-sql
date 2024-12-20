@@ -1,0 +1,14 @@
+CREATE TABLE "Clients" (
+	"Id"	TEXT NOT NULL UNIQUE PRIMARY KEY,
+	"Name"	TEXT NOT NULL,
+	"Email"	TEXT NOT NULL,
+);
+
+CREATE TABLE "Products" (
+	"Id"	TEXT PRIMARY KEY,
+	"Name"	TEXT NOT NULL,
+	"Brand"	TEXT NOT NULL,
+	"Price"	REAL NOT NULL,
+	"ClientId" TEXT NOT NULL,
+	FOREIGN KEY("ClientId") REFERENCES "Clients"("Id") ON DELETE CASCADE
+);
